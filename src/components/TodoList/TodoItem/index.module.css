@@ -1,0 +1,44 @@
+.module {
+  display: flex;
+  gap: 1rem;
+  padding-block: 1rem;
+  font-size: 18px;
+  background-color: white;
+}
+
+.checkbox {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-inline-start: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--light-grayish-blue);
+  border-radius: 50%;
+}
+
+.textbox {
+  flex-grow: 1;
+  border: none;
+}
+
+.checkbox:focus,
+.textbox:focus {
+  outline: none;
+}
+
+.checkbox:checked {
+  background:
+    url('/icon-check.svg') center no-repeat,
+    linear-gradient(
+      to right,
+      var(--check-background-1),
+      var(--check-background-2)
+    );
+}
+
+.deleteTodo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-inline-end: 1rem;
+  cursor: pointer;
+}

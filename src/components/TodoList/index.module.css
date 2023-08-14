@@ -1,0 +1,20 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+}
+
+.listItem:not(:last-child) {
+  border-bottom: solid var(--light-grayish-blue);
+}
+
+.footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding-block: 1rem;
+  padding-inline: 1rem;
+  font-size: 14px;
+  color: var(--dark-grayish-blue);
+  background-color: white;
+}
