@@ -23,6 +23,7 @@
 }
 
 body {
+  padding-inline: 1.5rem;
   font-size: 18px;
   line-height: 1.5;
   background-color: var(--very-light-gray);
@@ -32,4 +33,10 @@ body {
 
 a {
   color: inherit;
+}
+
+@media screen and (max-width: 755px) {
+  body {
+    background-image: url('/images/bg-mobile-light.jpg');
+  }
 }

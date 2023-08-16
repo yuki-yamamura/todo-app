@@ -4,6 +4,7 @@
   padding-block: 1rem;
   font-size: 18px;
   background-color: white;
+  border-radius: inherit;
 }
 
 .checkbox {
@@ -41,4 +42,20 @@
   height: 100%;
   margin-inline-end: 1rem;
   cursor: pointer;
+}
+
+@media screen and (max-width: 755px) {
+  .textbox {
+    font-size: 12px;
+  }
+
+  .checkbox {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .deleteTodo > img {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
 }

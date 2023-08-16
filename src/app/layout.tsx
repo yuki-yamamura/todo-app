@@ -1,3 +1,4 @@
+import { TodosProvider } from '@/context/todos';
 import { Josefin_Slab } from 'next/font/google';
 
 import type { Metadata } from 'next';
@@ -22,7 +23,9 @@ type Props = {
 const RootLayout = ({ children }: Props): JSX.Element => {
   return (
     <html lang="en" className={josefinSlab.className}>
-      <body>{children}</body>
+      <body>
+        <TodosProvider>{children}</TodosProvider>
+      </body>
     </html>
   );
 };

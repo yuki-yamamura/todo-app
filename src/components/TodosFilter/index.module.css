@@ -1,0 +1,9 @@
+.tablist {
+  display: flex;
+  gap: 1rem;
+  font-weight: 700;
+}
+
+.tablist [aria-selected='true'] {
+  color: var(--bright-blue);
+}

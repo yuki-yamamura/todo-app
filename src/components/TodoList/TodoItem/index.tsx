@@ -1,4 +1,5 @@
-import Image from 'next/image';
+import { useTodos } from '@/context/todos/';
+import { remove, update } from '@/context/todos/action';
 
 import type { Todo } from '@/types/Todo';
 
@@ -7,34 +8,49 @@ import styles from './index.module.css';
 type Props = {
   todo: Todo;
 };
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TodoItem: React.FC<Props> = ({ todo }) => {
+  const { dispatch } = useTodos();
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(update({ ...todo, text: e.target.value }));
+  };
+
+  const handleStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      update({ ...todo, status: e.target.checked ? 'completed' : 'active' }),
+    );
+  };
+
+  const handleRemove = () => {
+    dispatch(remove(todo.id));
+  };
+
   return (
-    <form
-      onSubmit={() => console.log('dummy function')}
-      className={styles.module}
-    >
+    <div className={styles.module}>
       <input
         type="checkbox"
-        onChange={() => console.log('dummy function')}
+        onChange={handleStatusChange}
         className={styles.checkbox}
+        checked={todo.status === 'completed'}
       />
-      <input type="text" className={styles.textbox} required />
+      <input
+        type="text"
+        className={styles.textbox}
+        required
+        value={todo.text}
+        onChange={handleTextChange}
+      />
       <label htmlFor="delete-todo">
         <button
           type="button"
-          onClick={() => console.log('dummy function')}
+          onClick={handleRemove}
           className={styles.deleteTodo}
         >
-          <Image
-            src="icon-cross.svg"
-            alt="delete-todo"
-            width={18}
-            height={18}
-          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="icon-cross.svg" alt="delete-todo" />
         </button>
       </label>
-    </form>
+    </div>
   );
 };
 

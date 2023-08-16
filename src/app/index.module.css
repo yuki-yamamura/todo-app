@@ -1,3 +1,31 @@
 .main {
-  color: slategrey;
+  width: 540px;
+  margin-inline: auto;
+}
+
+.heading {
+  margin-block-start: 70px;
+  margin-block-end: 48px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.5rem;
+}
+
+.remark {
+  padding-block: 2rem;
+  font-size: 14px;
+  color: var(--dark-grayish-blue);
+  text-align: center;
+}
+
+@media screen and (max-width: 755px) {
+  .main {
+    width: 100%;
+  }
+
+  .heading {
+    margin-block-start: 50px;
+    margin-block-end: 16px;
+  }
 }
