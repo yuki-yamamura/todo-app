@@ -1,11 +1,9 @@
-'use client';
-
 import Button from '../Button';
 import React from 'react';
 
 import styles from './index.module.css';
 
-export const filters = {
+const filters = {
   all: 'all',
   active: 'active',
   completed: 'completed',
@@ -20,10 +18,14 @@ type Props = {
 
 const TodosFilter: React.FC<Props> = ({ currentFilter, handleClick }) => {
   return (
-    <ul className={styles.tablist} role="tablist">
+    <ul className={styles.module}>
       {Object.values(filters).map((filter) => (
-        <li key={filter} role="tab" aria-selected={filter === currentFilter}>
-          <Button value={filter} handleClick={handleClick} selected={false} />
+        <li
+          key={filter}
+          aria-current={filter === currentFilter}
+          className={styles.listItem}
+        >
+          <Button value={filter} handleClick={handleClick} />
         </li>
       ))}
     </ul>

@@ -4,7 +4,6 @@ import TodoItem from './TodoItem';
 import Button from '../Button';
 import TodosFilter from '@/components/TodosFilter';
 import { useTodos } from '@/context/todos';
-import { remove } from '@/context/todos/action';
 import { useState } from 'react';
 
 import type { Filter } from '@/components/TodosFilter';
@@ -12,7 +11,7 @@ import type { Filter } from '@/components/TodosFilter';
 import styles from './index.module.css';
 
 const TodoList: React.FC = () => {
-  const { todos, dispatch } = useTodos();
+  const { todos, removeTodo } = useTodos();
   const [currentFilter, setCurrentFilter] = useState<Filter>('all');
   const filteredTodos =
     currentFilter === 'all'
@@ -22,10 +21,10 @@ const TodoList: React.FC = () => {
   const handleFilterSelect = (e: React.MouseEvent<HTMLButtonElement>) => {
     setCurrentFilter(e.currentTarget.value as Filter);
   };
-  const handleClear = () => {
+  const handleClearButtonClick = () => {
     todos
       .filter((todo) => todo.status === 'completed')
-      .forEach((todo) => dispatch(remove(todo.id)));
+      .forEach((todo) => removeTodo(todo.id));
   };
 
   const progressText =
@@ -38,43 +37,34 @@ const TodoList: React.FC = () => {
   return (
     <>
       {todos.length === 0 ? null : (
-        <ul className={styles.list}>
-          {filteredTodos.map((todo) => (
-            <li key={todo.id} className={styles.listItem}>
-              <TodoItem todo={todo} key={todo.id} />
+        <>
+          <ul className={styles.list}>
+            {filteredTodos.map((todo) => (
+              <li key={todo.id} className={styles.listItem}>
+                <TodoItem todo={todo} />
+              </li>
+            ))}
+            <li key="footer" className={styles.footer}>
+              <div>{progressText}</div>
+              <div className={styles.filterDesktop}>
+                <TodosFilter
+                  currentFilter={currentFilter}
+                  handleClick={handleFilterSelect}
+                />
+              </div>
+              <Button
+                value="Clear Completed"
+                handleClick={handleClearButtonClick}
+              />
             </li>
-          ))}
-          <li
-            key="footer"
-            className={styles.footer}
-            style={
-              filteredTodos.length === 0
-                ? {}
-                : ({
-                    '--border-radius': '0 0 0.25rem 0.25rem',
-                  } as React.CSSProperties)
-            }
-          >
-            <div>{progressText}</div>
-            <div className={styles.filterDesktop}>
+            <li key="todoSegmentedControl" className={styles.filterMobile}>
               <TodosFilter
                 currentFilter={currentFilter}
                 handleClick={handleFilterSelect}
               />
-            </div>
-            <Button
-              value="Clear Completed"
-              handleClick={handleClear}
-              selected={false}
-            />
-          </li>
-          <li key="todoSegmentedControl" className={styles.filterMobile}>
-            <TodosFilter
-              currentFilter={currentFilter}
-              handleClick={handleFilterSelect}
-            />
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </>
       )}
     </>
   );

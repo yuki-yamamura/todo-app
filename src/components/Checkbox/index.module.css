@@ -1,0 +1,27 @@
+.module {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-inline-start: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--light-grayish-blue);
+  border-radius: 50%;
+
+  @media (max-width: 768px) {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.module:focus {
+  outline: none;
+}
+
+.module:checked {
+  background:
+    url('/icon-check.svg') center no-repeat,
+    linear-gradient(
+      to right,
+      var(--check-background-1),
+      var(--check-background-2)
+    );
+}

@@ -1,42 +1,28 @@
 .module {
-  display: flex;
-  gap: 1rem;
-  padding-block: 1rem;
+  composes: todoContainer from global;
   font-size: 18px;
-  background-color: white;
   border-radius: inherit;
-}
-
-.checkbox {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-inline-start: 1rem;
-  cursor: pointer;
-  border: 1px solid var(--light-grayish-blue);
-  border-radius: 50%;
 }
 
 .textbox {
   flex-grow: 1;
   border: none;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 }
 
-.checkbox:focus,
 .textbox:focus {
   outline: none;
 }
 
-.checkbox:checked {
-  background:
-    url('/icon-check.svg') center no-repeat,
-    linear-gradient(
-      to right,
-      var(--check-background-1),
-      var(--check-background-2)
-    );
+.checkbox:checked + .textbox {
+  color: var(--light-grayish-blue);
+  text-decoration: line-through;
 }
 
-.deleteTodo {
+.button {
   display: flex;
   align-items: center;
   height: 100%;
@@ -44,18 +30,8 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 755px) {
-  .textbox {
-    font-size: 12px;
-  }
-
-  .checkbox {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-
-  .deleteTodo > img {
+@media (max-width: 768px) {
+  .button > img {
     width: 0.75rem;
-    height: 0.75rem;
   }
 }

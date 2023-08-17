@@ -1,5 +1,5 @@
+import Checkbox from '@/components/Checkbox';
 import { useTodos } from '@/context/todos/';
-import { remove, update } from '@/context/todos/action';
 
 import type { Todo } from '@/types/Todo';
 
@@ -9,43 +9,38 @@ type Props = {
   todo: Todo;
 };
 const TodoItem: React.FC<Props> = ({ todo }) => {
-  const { dispatch } = useTodos();
+  const { removeTodo, updateTodo } = useTodos();
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(update({ ...todo, text: e.target.value }));
+    updateTodo({ ...todo, text: e.currentTarget.value });
   };
 
-  const handleStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(
-      update({ ...todo, status: e.target.checked ? 'completed' : 'active' }),
-    );
+  const handleStatusChange = () => {
+    updateTodo({
+      ...todo,
+      status: todo.status === 'active' ? 'completed' : 'active',
+    });
   };
 
   const handleRemove = () => {
-    dispatch(remove(todo.id));
+    removeTodo(todo.id);
   };
 
   return (
     <div className={styles.module}>
-      <input
-        type="checkbox"
-        onChange={handleStatusChange}
-        className={styles.checkbox}
+      <Checkbox
         checked={todo.status === 'completed'}
+        handleClick={handleStatusChange}
       />
       <input
         type="text"
-        className={styles.textbox}
-        required
         value={todo.text}
+        required
         onChange={handleTextChange}
+        className={styles.textbox}
       />
       <label htmlFor="delete-todo">
-        <button
-          type="button"
-          onClick={handleRemove}
-          className={styles.deleteTodo}
-        >
+        <button type="button" onClick={handleRemove} className={styles.button}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="icon-cross.svg" alt="delete-todo" />
         </button>

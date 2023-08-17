@@ -8,20 +8,33 @@ const ActionType = {
 
 export type TodoAction = ReturnType<typeof add | typeof remove | typeof update>;
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const add = (text: string, status: 'active' | 'completed') => ({
+export const add = (
+  text: string,
+  status: 'active' | 'completed',
+): {
+  type: typeof ActionType.added;
+  payload: Pick<Todo, 'text' | 'status'>;
+} => ({
   type: ActionType.added,
   payload: { text, status },
 });
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const remove = (id: number) => ({
+export const remove = (
+  id: number,
+): {
+  type: typeof ActionType.removed;
+  payload: Pick<Todo, 'id'>;
+} => ({
   type: ActionType.removed,
   payload: { id },
 });
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const update = (todo: Todo) => ({
+export const update = (
+  todo: Todo,
+): {
+  type: typeof ActionType.updated;
+  payload: Todo;
+} => ({
   type: ActionType.updated,
   payload: todo,
 });

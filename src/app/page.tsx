@@ -3,17 +3,16 @@ import TodoList from '@/components/TodoList';
 
 import type { NextPage } from 'next';
 
-import styles from '@/app/index.module.css';
+import styles from './index.module.css';
 
-const Home: NextPage = () => {
+const Page: NextPage = () => {
   return (
-    <main className={styles.main}>
+    <main className={styles.module}>
       <h1 className={styles.heading}>TODO</h1>
       <NewTodo />
       <TodoList />
-      <div className={styles.remark}>drag and drop to reorder list</div>
     </main>
   );
 };
 
-export default Home;
+export default Page;

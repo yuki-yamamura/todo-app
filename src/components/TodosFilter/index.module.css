@@ -1,9 +1,9 @@
-.tablist {
+.module {
   display: flex;
   gap: 1rem;
   font-weight: 700;
 }
 
-.tablist [aria-selected='true'] {
+.listItem[aria-current='true'] {
   color: var(--bright-blue);
 }
